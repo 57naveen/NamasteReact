@@ -52,6 +52,7 @@ const Body = () => {
         <button
           className="filter-btn"
           onClick={() => {
+            console.log("pressed")
             const filteredList = listOfRestaurants.filter(
               (res) => res.info.avgRatingString > 4.2
             );
