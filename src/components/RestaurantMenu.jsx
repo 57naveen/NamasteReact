@@ -13,29 +13,30 @@ const RestaurantMenu = () => {
   }, []);
 
   const fetchMenu = async () => {
-    const data = await fetch(MENU_URL + resId);
+    const data = await fetch(MENU_URL + resId);  //MENU_URL is coming from constant file and resId from useParams state
 
     const json = await data.json();
     console.log(json);
     setResInfo(json.data);
   };
+  
 
- 
+ // The next two lines are get the info about restaurant from the json which is stored in reInfo state
   const info = resInfo?.cards?.[2]?.card?.card?.info || {};
   const { name = "Unknown", cuisines = [], costForTwoMessage = "N/A" } = info;
 
+  // This is used to get the item list from the restaurant 
   const itemCards = resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1]?.card?.card?.itemCards || [];
 
 
   return resInfo === null ? (
-    <Shimmer />
+    <Shimmer /> 
   ) : (
     <>
       <div className="menu">
         <h1>{name}</h1>
         <p>
-          {cuisines.length > 0 ? cuisines.join(", ") : "No cuisines available"}{" "}
-          - {costForTwoMessage}
+          {cuisines.length > 0 ? cuisines.join(", ") : "No cuisines available"}{" "}- {costForTwoMessage}
         </p>
         <h2>Menu</h2>
         <ul>

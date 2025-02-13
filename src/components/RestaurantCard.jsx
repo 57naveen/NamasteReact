@@ -7,21 +7,19 @@ const RestaurantCard = (props) => {
     const { deliveryTime } = resData?.info.sla;
   
     return (
-      <div className="res-card" style={{ backgroundColor: "#f0f0f0" }}>
-        <img
-          className="res-logo"
-          alt="res-logo"
-          src={
-            CDN_URL + cloudinaryImageId
-          }
-        />
-        <h3>{name}</h3>
-        <h4>{cuisines.join(", ")}</h4>
-        <h4>{avgRating} stars</h4>
-        <h4>{areaName}</h4>
-        <h4>{costForTwo}</h4>
-        <h4>{deliveryTime} minutes</h4>
+      <div className="res-card">
+      <img className="res-logo" alt="res-logo" src={CDN_URL + cloudinaryImageId} />
+      <div className="res-details">
+        <h3 className="res-name">{name}</h3>
+        <p className="res-cuisines">{cuisines.join(", ")}</p>
+        <div className="res-info">
+          <span className="rating">{avgRating} ⭐</span>
+          <span className="delivery">{deliveryTime} min</span>
+        </div>
+        <p className="res-area">{areaName}</p>
+        <p className="res-price">{costForTwo}</p>
       </div>
+    </div>
     );
   };
 

@@ -3,6 +3,7 @@ import resList from "../utils/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import { HOME_API } from "../utils/constants";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -14,9 +15,7 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.455439317939792&lng=78.37514048836614&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch(HOME_API);
 
     const json = await data.json();
 
@@ -55,9 +54,9 @@ const Body = () => {
           onClick={() => {
             console.log("pressed")
             const filteredList = listOfRestaurants.filter(
-              (res) => res.info.avgRatingString > 4.2
+              (res) => res.info.avgRatingString > 4.1
             );
-            setListOfRestaurants(filteredList);
+            setFilteredRestaurants(filteredList);
           }}
         >
           Top Rated Restaurants
@@ -65,7 +64,7 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredRestaurants.map((restaurant) => (
-          <Link to={"/restaurant/"+restaurant.info.id} ><RestaurantCard key={restaurant.info.id} resData={restaurant} /></Link>
+          <Link to={"/restaurant/"+restaurant.info.id} > <RestaurantCard key={restaurant.info.id} resData={restaurant} /> </Link>
           
         ))}
       </div>
