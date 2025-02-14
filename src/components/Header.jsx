@@ -21,26 +21,29 @@ const Header = () => {
    
     return (
       <div className="header">
-        <div className="logo-container">
-          <img
-            className="logo"
-            src={LOGO_URL}
-          />
-        </div>
-        <div className="nav-items">
-          <ul>
-            <li> <Link to="/">Home</Link> </li>
-            <li> <Link to="/about">About Us</Link> </li>
-            <li> <Link to="/contact">Contact Us</Link> </li>
-            <li>Cart</li>
-            <button className="login" onClick={()=>
-              {
-                btnName === "Login"? setBtnName("logout") : setBtnName("Login")
-              }
-            }>{btnName}</button>
-          </ul>
-        </div>
+      {/* Logo Section */}
+      <div className="logo-container">
+        <img className="logo" src={LOGO_URL} alt="Logo" />
       </div>
+
+      
+
+      {/* Navigation Items */}
+      <div className="nav-items">
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About Us</Link></li>
+          <li><Link to="/contact">Contact Us</Link></li>
+          <li>Cart</li>
+          <button
+            className="login-btn"
+            onClick={() => setBtnName(btnName === "Login" ? "Logout" : "Login")}
+          >
+            {btnName}
+          </button>
+        </ul>
+      </div>
+    </div>
     );
   };
 
