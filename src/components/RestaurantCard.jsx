@@ -8,14 +8,14 @@ const RestaurantCard = (props) => {
   const { deliveryTime } = resData?.info.sla;
 
   return (
-    <div className="res-card">
+    <div className="m-4 p-4 w-[250px] rounded-lg bg-gray-200 shadow-lg hover:shadow-2xl">
       <img
-        className="res-logo"
+        className="rounded-lg h-60 w-60 shadow-2xl"
         alt="res-logo"
         src={CDN_URL + cloudinaryImageId}
       />
       <div className="res-details">
-        <h3 className="res-name">{name}</h3>
+        <h3 className="font-bold py-4">{name}</h3>
         <p className="res-cuisines">
           {cuisines.length > 3
             ? cuisines.slice(0, 3).join(", ") + " ..."
