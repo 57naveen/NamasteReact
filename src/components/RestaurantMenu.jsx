@@ -19,7 +19,7 @@ const RestaurantMenu = () => {
 
   return resInfo === null ? (
     <Shimmer /> 
-  ) : (
+  ) : (   
     <>
       <div className="menu">
         <h1>{name}</h1>

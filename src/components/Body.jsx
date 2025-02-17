@@ -6,14 +6,18 @@ import { Link } from "react-router-dom";
 import { HOME_API } from "../utils/constants";
 
 import useOnlineStatus from "../utils/useOnlineStatus";
+import FoodCategory from "./FoodCategory";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [foodCategory, setFoodCategory] = useState([]);
+  const [foodHeader, setFoodHeader] = useState("");
 
   useEffect(() => {
     fetchData();
+    fetchFoodCategory();
   }, []);
 
   const fetchData = async () => {
@@ -34,6 +38,19 @@ const Body = () => {
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
+
+  const fetchFoodCategory = async () =>{
+
+    const data = await fetch ("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.45530178705191&lng=78.3752316981554&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+    const json = await data.json();
+
+    console.log(json.data.cards[0].card.card.gridElements.infoWithStyle.info) ;
+    console.log("Header",json.data.cards[0].card.card.header) ;
+    
+    setFoodCategory(json.data.cards[0].card.card.gridElements.infoWithStyle.info[3]);
+    setFoodHeader(json.data.cards[0].card.card.header);
+    
+  }
 
   const onlineStatus = useOnlineStatus();
 
@@ -83,6 +100,11 @@ const Body = () => {
           </button>
         </div>
       </div>
+
+      <div>
+       { <FoodCategory foodData={foodCategory} header={foodHeader} /> }
+      </div>
+
       <div className="flex flex-wrap">
         {filteredRestaurants.map((restaurant) => (
           <Link
