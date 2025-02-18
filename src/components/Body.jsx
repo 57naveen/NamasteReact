@@ -1,12 +1,13 @@
 import RestaurantCard,{withPromtedLable} from "./RestaurantCard";
 import resList from "../utils/mockData";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { HOME_API } from "../utils/constants";
 
 import useOnlineStatus from "../utils/useOnlineStatus";
 import FoodCategory from "./FoodCategory";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -16,6 +17,8 @@ const Body = () => {
   const [foodHeader, setFoodHeader] = useState("");
 
   const RestaurantCardPromoted = withPromtedLable(RestaurantCard)
+
+
 
   useEffect(() => {
     fetchData();
@@ -27,11 +30,11 @@ const Body = () => {
 
     const json = await data.json();
 
-    console.log(json);
+    // console.log(json);
 
-    console.log(
-      json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
-    );
+    // console.log(
+    //   json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+    // );
 
     setListOfRestaurants(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -58,7 +61,9 @@ const Body = () => {
 
   if (onlineStatus === false) {
     return <h1>Your are offline now please check your internet...!</h1>;
+    
   }
+  const {loggedInUser,setUserName} = useContext(UserContext)
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
@@ -100,6 +105,14 @@ const Body = () => {
           >
             ⭐ Top Rated
           </button>
+        </div>
+
+        <div className="m-4 p-3 flex items-center"> 
+          <label>User Name  :  </label>
+          <input className="border border-black p-1 ml-2 rounded-lg"
+          value={loggedInUser}
+          onChange={(e)=> setUserName(e.target.value)}
+          />
         </div>
       </div>
 

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect,useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -9,6 +9,9 @@ import Error from "./components/Error";
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./components/RestaurantMenu";
+import UserContext from "./utils/UserContext";
+
+
 // import Grocery from "./components/Grocery";
 
 
@@ -23,12 +26,37 @@ import RestaurantMenu from "./components/RestaurantMenu";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
+
 const AppLayout = () => {
+
+ const [userName, setUserName ] = useState();
+
+ // just use the dummy fetch API setup
+
+ useEffect(()=>
+{
+   // Make a API call and send userName and password
+   
+   //dummy data for testing 
+   const data = {
+    name:"Navee"
+   }
+
+   setUserName(data.name)
+   
+},[])
+
+// Now we need to pass the userName to context file to update the value
+   
   return (
+
+     <UserContext.Provider value={{loggedInUser:userName ,setUserName}}>
     <div className="app">
       <Header />
       <Outlet />
     </div>
+     </UserContext.Provider>
+
   );
 };
 

@@ -2,12 +2,15 @@ import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
 
   const { resId } = useParams();
 
   const resInfo = useRestaurantMenu(resId);
+
+  const [showIndex, setShowIndex] = useState(null)
   
 
  // The next two lines are get the info about restaurant from the json which is stored in reInfo state
@@ -36,9 +39,15 @@ const RestaurantMenu = () => {
           {cuisines.length > 0 ? <span className="font-bold">{cuisines.join(", ")}</span> : "No cuisines available"}{" "}- {costForTwoMessage}
         </p>
       
-      {categories.map((category)=>
+      {categories.map((category,index)=>
       (
-        <RestaurantCategory key={category?.card?.card?.title} data={category?.card?.card} />
+        //This is the controlled component
+        <RestaurantCategory 
+        key={category?.card?.card?.title} 
+        data={category?.card?.card} 
+        showItems={index === showIndex? true  :  false }
+        setShowIndex={()=> setShowIndex(index)}
+        />
       )   
       )}
         

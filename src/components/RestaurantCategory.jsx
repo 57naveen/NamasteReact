@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import ItemList from "./ItemList";
 
-const RestaurantCategory = ({ data }) => {
-  const [showItems, setShowItems] = useState(false);
+const RestaurantCategory = ({ data,showItems, setShowIndex }) => {
+  // const [showItems, setShowItems] = useState(false);
 
   const handelClick = () => {
-    setShowItems(!showItems);
+    setShowIndex();
   };
 
   // console.log(data)
+
+ /**
+  * This component is controled by parent component through props
+  * 
+  * The showItems is coming from RestaurantMenu component
+  * 
+  */
+
   return (
     <div>
       {/* Header */}
