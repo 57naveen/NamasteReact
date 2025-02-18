@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard,{withPromtedLable} from "./RestaurantCard";
 import resList from "../utils/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
@@ -15,9 +15,11 @@ const Body = () => {
   const [foodCategory, setFoodCategory] = useState([]);
   const [foodHeader, setFoodHeader] = useState("");
 
+  const RestaurantCardPromoted = withPromtedLable(RestaurantCard)
+
   useEffect(() => {
     fetchData();
-    fetchFoodCategory();
+    // fetchFoodCategory();
   }, []);
 
   const fetchData = async () => {
@@ -39,18 +41,18 @@ const Body = () => {
     );
   };
 
-  const fetchFoodCategory = async () =>{
+  // const fetchFoodCategory = async () =>{
 
-    const data = await fetch ("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.45530178705191&lng=78.3752316981554&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
-    const json = await data.json();
+  //   const data = await fetch ("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.45530178705191&lng=78.3752316981554&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+  //   const json = await data.json();
 
-    console.log(json.data.cards[0].card.card.gridElements.infoWithStyle.info) ;
-    console.log("Header",json.data.cards[0].card.card.header) ;
+  //   console.log(json.data.cards[0].card.card.gridElements.infoWithStyle.info) ;
+  //   console.log("Header",json.data.cards[0].card.card.header) ;
     
-    setFoodCategory(json.data.cards[0].card.card.gridElements.infoWithStyle.info[3]);
-    setFoodHeader(json.data.cards[0].card.card.header);
+  //   setFoodCategory(json.data.cards[0].card.card.gridElements.infoWithStyle.info[3]);
+  //   setFoodHeader(json.data.cards[0].card.card.header);
     
-  }
+  // }
 
   const onlineStatus = useOnlineStatus();
 
@@ -101,9 +103,9 @@ const Body = () => {
         </div>
       </div>
 
-      <div>
+      {/* <div>
        { <FoodCategory foodData={foodCategory} header={foodHeader} /> }
-      </div>
+      </div> */}
 
       <div className="flex flex-wrap">
         {filteredRestaurants.map((restaurant) => (

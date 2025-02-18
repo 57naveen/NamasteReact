@@ -32,4 +32,26 @@ const RestaurantCard = (props) => {
   );
 };
 
+// Higher Order Component
+
+// This higher order component take the input as a another component and return the new component
+
+// we are not using this HOC now because of API data 
+
+export const withPromtedLable = (RestaurantCard) =>
+{
+  return (props) =>
+  {
+    return (
+      <div>
+        <labal>Promoted</labal>
+        <RestaurantCard {...props} />
+      </div>
+    )
+  }
+}
+
+
+
+
 export default RestaurantCard;
