@@ -34,30 +34,35 @@ const Header = () => {
     },[]);
    
     return (
-      <div className="flex justify-between bg-orange-300 shadow-lg">
+      <div className="flex justify-between shadow-lg">
       {/* Logo Section */}
       <div className="">
-        <img className="w-36" src={LOGO_URL} alt="Logo" />
+        <img className="w-24" src={LOGO_URL} alt="Logo" />
       </div>
 
       
 
       {/* Navigation Items */}
-      <div className="flex items-center">
+      <div className="flex items-center font-bold ">
         <ul className="flex p-4 m-4">
-          <li className="px-4">Online Status :{onlineStatus? "🟢" : "🔴"}</li>
-          <li className="px-4"><Link to="/">Home</Link></li>
-          <li className="px-4"><Link to="/about">About Us</Link></li>
-          <li className="px-4"><Link to="/contact">Contact Us</Link></li>
-          <li className="px-4"><Link to="/grocery">Grocery</Link></li>
-          <li className="px-4 font-bold"><Link to="/cart">Cart - ({cartItems.length})</Link></li>
+        <li className="px-4">Online Status :{onlineStatus? "🟢" : "🔴"}</li>
+          <li className="px-4  hover:text-[#fe5005]"><Link to="/">Home</Link></li>
+          {/* <li className="px-4"><Link to="/about">About Us</Link></li> */}
+          {/* <li className="px-4"><Link to="/contact">Contact Us</Link></li> */}
+          <li className="px-4 hover:text-[#fe5005]"><Link to="/grocery">Grocery</Link></li>
+          <li className="px-4 hover:text-[#fe5005] font-bold"><Link to="/cart">Cart({cartItems.length})</Link></li>
+          
+          
+          <li className="px-4  font-bold" >{loggedInUser}</li>
+          
           <button
-            className="className= px-4"
+            className="className= px-4 cursor-pointer hover:text-[#fe5005]"
             onClick={() => setBtnName(btnName === "Login" ? "Logout" : "Login")}
           >
             {btnName}
           </button>
-          <li className="px-4  font-bold" >{loggedInUser}</li>
+         
+
         </ul>
       </div>
     </div>

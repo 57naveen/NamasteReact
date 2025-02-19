@@ -71,56 +71,57 @@ const Body = () => {
     <div className="body">
       <div className="flex">
         {/* Search Bar */}
-        <div className="m-4 p-4">
-          <input
-            type="text"
-            className="search-input border border-solid border-black"
-            placeholder="Search restaurants..."
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-          />
-          <button
-            className="px-4 py-1 bg-cyan-500 rounded-lg ml-2 cursor-pointer"
-            onClick={() => {
-              const filteredData = listOfRestaurants.filter((res) =>
-                res.info.name.toLowerCase().includes(searchText.toLowerCase())
-              );
-              setFilteredRestaurants(filteredData);
-            }}
-          >
-            🔍
-          </button>
-        </div>
+       <div className="m-4 p-4 flex items-center gap-2 bg-white  rounded-2xl">
+  <input
+    type="text"
+    className="w-full px-4 py-2 border border-gray-300 focus:border-[#ff5200] focus:ring-2 focus:ring-[#ff5200] rounded-2xl outline-none transition-all duration-200"
+    placeholder="Search restaurants..."
+    value={searchText}
+    onChange={(e) => setSearchText(e.target.value)}
+  />
+  <button
+    className="px-4 py-2  cursor-pointer  bg-amber-200  font-medium rounded-lg  transition-all duration-200 active:scale-95"
+    onClick={() => {
+      const filteredData = listOfRestaurants.filter((res) =>
+        res.info.name.toLowerCase().includes(searchText.toLowerCase())
+      );
+      setFilteredRestaurants(filteredData);
+    }}
+  >
+    Search
+  </button>
+</div>
 
-        <div className="m-4 p-4 flex items-center">
-          {/* Filter Button */}
-          <button
-            className="px-4 py-1 bg-gray-300 rounded-lg ml-2 cursor-pointer"
-            onClick={() => {
-              const filteredList = listOfRestaurants.filter(
-                (res) => res.info.avgRatingString > 4.1
-              );
-              setFilteredRestaurants(filteredList);
-            }}
-          >
-            ⭐ Top Rated
-          </button>
-        </div>
+<div className="m-4 p-4 flex items-center">
+  {/* Filter Button */}
+  <button
+    className="px-5 py-2 cursor-pointer text-gray-800 font-medium rounded-xl shadow-md transition-all duration-200 active:scale-95 flex items-center gap-2"
+    onClick={() => {
+      const filteredList = listOfRestaurants.filter(
+        (res) => res.info.avgRatingString > 4.1
+      );
+      setFilteredRestaurants(filteredList);
+    }}
+  >
+    ⭐ Top Rated
+  </button>
+</div>
 
-        <div className="m-4 p-3 flex items-center"> 
-          <label>UserName  :  </label>
-          <input className="border border-black p-1 ml-2 rounded-lg"
+
+        {/* <div className="m-4 p-3 flex items-center "> 
+          <label className="font-bold">UserName  :  </label>
+          <input className="border px-4 py-2 border-gray-300  focus:border-[#ff5200] focus:ring-2 focus:ring-[#ff5200] p-1 ml-2 rounded-2xl outline-none transition-all duration-200"
           value={loggedInUser}
           onChange={(e)=> setUserName(e.target.value)}
           />
-        </div>
+        </div> */}
       </div>
 
       {/* <div>
        { <FoodCategory foodData={foodCategory} header={foodHeader} /> }
       </div> */}
 
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap justify-start pb-10">
         {filteredRestaurants.map((restaurant) => (
           <Link
             to={"/restaurant/" + restaurant.info.id}
@@ -128,10 +129,13 @@ const Body = () => {
             className="link"
           >
             {" "}
-            <RestaurantCard resData={restaurant} />{" "}
+            <div className="transition-transform duration-100 hover:scale-95">
+        <RestaurantCard resData={restaurant} />
+      </div>
           </Link>
         ))}
       </div>
+
     </div>
   );
 };
