@@ -1,8 +1,20 @@
 import React from "react";
 import { CDN_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../Redux/cartSlice";
 
 const ItemList = ({ items }) => {
-  console.log(items);
+  // console.log(items);
+   
+   const dispatch = useDispatch();
+
+   const addItemCart = (item) =>{
+    //Dispatch an action
+      dispatch(addItem(item))
+   }
+
+   
+   
   return (
     <div>
       {items.map((item) => (
@@ -25,7 +37,7 @@ const ItemList = ({ items }) => {
 
           <div className="w-3/12 p-4">
             <div className="absolute ">
-              <button className="p-2 w-26 mx-5 my-30 bg-white shadow-lg text-green-500 font-bold rounded-xl cursor-pointer">
+              <button className="p-2 w-26 mx-5 my-30 bg-white shadow-lg text-green-500 font-bold rounded-xl cursor-pointer" onClick={ () => addItemCart(item) }>
                 ADD
               </button>
             </div>
