@@ -31,7 +31,7 @@ import Cart from "./components/Cart";
 const Grocery = lazy(() => import("./components/Grocery"));
 
 
-const AppLayout = () => {
+const AppLayout = () => { 
 
  const [userName, setUserName ] = useState();
 
